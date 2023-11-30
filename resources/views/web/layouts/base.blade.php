@@ -79,7 +79,7 @@
                         @endif
                     </a>
                     @if(Auth::guard('customer')->check())
-                    <a class="nav-icon position-relative text-decoration-none" href="#">
+                    <a class="nav-icon position-relative text-decoration-none" href="{{ route('web.customer.profil') }}">
                         <i class="fa fa-fw fa-user text-dark mr-3"></i>
                     </a>
                     @else

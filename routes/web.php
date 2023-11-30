@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Actions;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\WebPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -57,4 +58,12 @@ Route::middleware('auth:customer')
 
         Route::post('/cakeout', Actions\CakeoutOrderController::class)
             ->name('action.cakeout');
+
+        Route::controller(CustomerController::class)
+            ->name('web.customer.')
+            ->prefix('/customer')
+            ->group(function () {
+                Route::get('/profil', 'profil')->name('profil');
+                Route::get('/order', 'order')->name('order');
+            });
      });

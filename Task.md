@@ -19,11 +19,11 @@
   * add cart [v]
   * delete cart [v]
   * personal page
-   * order list
-   * logout
-   * profil -> opsional
+   * order list [v]
+   * logout [v]
+   * profil -> opsional [v]
   * checkout page
     * kurang pesan berhasil atau gagal
   * product
-    * catalog
-    * detail
+    * catalog [v]
+    * detail [v]
