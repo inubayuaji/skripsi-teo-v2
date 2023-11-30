@@ -116,8 +116,9 @@
                 @foreach($cartItems as $key => $cart)
                 <div class="cart-item">
                     <div class="row">
-                        <div class="col-2">
-                            <img src="{{ asset('assets/img/shop_01.jpg') }}">
+                        <div class="col-2" style="position: relative;">
+                            <img src="{{ url('storage/' . $cart->product->featured_image) }}">
+                            <a href="{{ route('action.cart_delete', ['product_id' => $cart->product_id]) }}" class="btn btn-danger btn-sm" style="position: absolute; top: -10px; left: 5px;">x</a>
                         </div>
                         <div class="col-4">
                             <h3 class="h3">{{ $cart->product->name }}</h3>

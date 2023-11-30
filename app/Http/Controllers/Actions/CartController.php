@@ -54,7 +54,7 @@ class CartController extends Controller
             ]);
     }
 
-    public function remove(Request $request) {
+    public function delete(Request $request) {
         $customerId = Auth::guard('customer')->id();
         $productId = $request->query('product_id');
 
