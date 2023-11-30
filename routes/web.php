@@ -51,6 +51,10 @@ Route::middleware('auth:customer')
             ->name('action.')
             ->group(function () {
                 Route::get('/cart/add', 'add')->name('cart_add');
+                Route::get('/cart/update', 'update')->name('cart_update');
                 Route::get('/cart/delete', 'delete')->name('cart_delete');
             });
-    });
+
+        Route::post('/cakeout', Actions\CakeoutOrderController::class)
+            ->name('action.cakeout');
+     });

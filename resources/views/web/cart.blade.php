@@ -33,15 +33,29 @@
             function CartItem() {
                 const elDoc = $(document);
 
+                function fnUpdateQtyOrderd(productId, qtyOrdered) {
+                    $.ajax({
+                        type: 'get',
+                        url: '{{ route('action.cart_update') }}',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'product_id': productId,
+                            'qty_ordered': qtyOrdered
+                        }
+                    });
+                }
                 function evChangeQtyOredered() {
                     let key = $(this).data('key');
                     let price = $(this).data('price');
                     let qtyOrderd = $(this).val();
+                    let productId = $(this).data('product-id');
 
                     const elSubtotal = $('#key-' + key);
 
                     let subtotal = price * qtyOrderd;
                     state.cartItemSubtotals[key] = subtotal
+
+                    fnUpdateQtyOrderd(productId, qtyOrderd);
 
                     elSubtotal.text('Rp' + numberFormat(subtotal));
                     elSubtotal.attr('data-subtotal', subtotal);
@@ -115,7 +129,16 @@
                         </div>
                         <div class="col-2">
                             <h3 class="h3">Jumlah</h3>
-                            <input type="number" name="qty" value="{{ $cart->qty_ordered }}" style="width: 100%;" data-qty="" data-price="{{ $cart->product->price }}" data-key="{{ $key }}">
+                            <input
+                                type="number"
+                                name="qty"
+                                value="{{ $cart->qty_ordered }}"
+                                style="width: 100%;"
+                                data-qty=""
+                                data-price="{{ $cart->product->price }}"
+                                data-key="{{ $key }}"
+                                data-product-id="{{ $cart->product_id }}"
+                            >
                         </div>
                         <div class="col-2">
                             <h3 class="h3">Sub total</h3>
@@ -127,22 +150,25 @@
             </div>
         </div>
         <div class="col-12 col-md-3">
-            <h3 class="h3">Alamat</h3>
-            <textarea style="width: 100%;"></textarea>
-            <hr>
-            <div class="d-flex justify-content-between">
-                <div>Sub total</div>
-                <div class="text-end" id="chekcout_info_subtotal">Rp{{ number_format($subtotals, 2, '.', ',') }}</div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div>Biaya pengiriman</div>
-                <div class="text-end">Rp 15.000</div>
-            </div>
-            <div class="d-flex justify-content-between">
-                <div><h3 class="h3">Total</h3></div>
-                <div class="text-end"><h3 class="h3" id="chekcout_info_total">Rp{{ number_format($subtotals + 15000, 2, '.', ',') }}</h3></div>
-            </div>
-            <a href="#" class="btn btn-success">Checkout</a>
+            <form method="post" action="{{ route('action.cakeout') }}">
+                @csrf
+                <h3 class="h3">Alamat</h3>
+                <textarea style="width: 100%;" name="shipment_address" required></textarea>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <div>Sub total</div>
+                    <div class="text-end" id="chekcout_info_subtotal">Rp{{ number_format($subtotals, 2, '.', ',') }}</div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div>Biaya pengiriman</div>
+                    <div class="text-end">Rp 15.000</div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <div><h3 class="h3">Total</h3></div>
+                    <div class="text-end"><h3 class="h3" id="chekcout_info_total">Rp{{ number_format($subtotals + 15000, 2, '.', ',') }}</h3></div>
+                </div>
+                <button type="submit" class="btn btn-success">Checkout</button>
+            </form>
         </div>
     </div>
 </div>

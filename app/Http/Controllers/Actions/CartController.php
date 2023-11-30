@@ -41,6 +41,18 @@ class CartController extends Controller
         return redirect()
             ->back();
     }
+    
+    public function update(Request $request) {
+        $customerId = Auth::guard('customer')->id();
+        $productId = $request->query('product_id');
+        $newQtyOrderd = $request->query('qty_ordered');
+
+        Cart::where('customer_id', $customerId)
+            ->where('product_id', $productId)
+            ->update([
+                'qty_ordered' => $newQtyOrderd
+            ]);
+    }
 
     public function remove(Request $request) {
         $customerId = Auth::guard('customer')->id();
