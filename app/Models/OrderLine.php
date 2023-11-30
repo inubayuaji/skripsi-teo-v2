@@ -17,4 +17,8 @@ class OrderLine extends Model
         'price',
         'amount_total'
     ];
+
+    public function product() {
+        return $this->hasOne(Product::class, 'id', 'product_id');
+    }
 }

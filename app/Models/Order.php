@@ -18,4 +18,12 @@ class Order extends Model
         'shipment_address',
         'status'
     ];
+
+    public function customer() {
+        return $this->hasOne(Customer::class, 'id', 'costumer_id');
+    }
+
+    public function lines() {
+        return $this->hasMany(OrderLine::class, 'order_id', 'id');
+    }
 }

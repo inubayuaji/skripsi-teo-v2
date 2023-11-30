@@ -17,8 +17,8 @@ Route::group([
     $router->resource('products', ProductController::class);
     $router->resource('customers', CustomerController::class)
         ->only(['index', 'show', 'destroy']);
-    $router->resource('orders', OrderController::class)
-        ->only(['index', 'show', 'destroy']);
+    $router->resource('orders', OrderController::class);
+        // ->only(['index', 'show', 'destroy']);
     $router->resource('contact-forms', ContactFormController::class)
         ->only(['index', 'show', 'destroy']);
 });
