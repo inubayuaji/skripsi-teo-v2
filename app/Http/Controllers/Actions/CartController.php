@@ -22,7 +22,7 @@ class CartController extends Controller
         if($product->stock < $qtyOrdered) {
             return redirect()
                 ->back()
-                ->with('fail_cart_add', 'Quantiti stock tidak mencukupi.');
+                ->with('fail_cart_add', 'Stock tidak mencukupi.');
         }
 
         // check if user already add product

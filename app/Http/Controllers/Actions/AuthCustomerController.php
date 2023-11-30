@@ -53,7 +53,7 @@ class AuthCustomerController extends Controller
             ->login($customer);
 
         return redirect()
-            ->route('web.shop');
+            ->route('web.index');
     }
 
     public function logout() {

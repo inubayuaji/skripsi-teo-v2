@@ -5,8 +5,19 @@
 @section('content')
 <!-- Start Content -->
 <div class="container py-5">
+    @if(Session::has('fail_cart_add'))
     <div class="row">
-
+        <div class="col-lg-12">
+            <div class="alert alert-danger">
+                {{ Session::get('fail_cart_add') }}
+                @php
+                Session::forget('fail_cart_add');
+                @endphp
+            </div>
+        </div>
+    </div>
+    @endif
+    <div class="row">
         <div class="col-lg-12">
             <div class="row">
                 <div class="col-md-4">
