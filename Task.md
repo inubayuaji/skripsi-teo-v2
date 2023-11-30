@@ -9,17 +9,21 @@
  * register [v]
  * logout [v]
 
-- fitur makerting
-  * table heeader hero
-  * featured product
-
 - membuat crud produk
   * tambah [v]
   * list produk [v]
   * tidak bisa hapus hanya non aktif [v]
   * edit [v]
   * katalog produk
-  * cart page
-  * checkout page
+  * cart page [v]
   * add cart [v]
   * delete cart [v]
+  * personal page
+   * order list
+   * logout
+   * profil -> opsional
+  * checkout page
+    * kurang pesan berhasil atau gagal
+  * product
+    * catalog
+    * detail
