@@ -23,7 +23,7 @@
     <script>
         $(document).ready(function() {
             var state = {
-                cartItemSubtotals: @json($cartItemSubtotals, JSON_FORCE_OBJECT)
+                cartItemSubtotals: {}
             }
 
             function numberFormat(number) {
@@ -99,29 +99,6 @@
     <div class="row">
         <div class="col-12 col-md-9">
             <div class="cart-items">
-                {{-- <div class="cart-item">
-                    <div class="row">
-                        <div class="col-2">
-                            <img src="{{ asset('assets/img/shop_01.jpg') }}">
-                        </div>
-                        <div class="col-4">
-                            <h3 class="h3">Kemeja putih</h3>
-                            <p>Deskripsi singkat mengenai produk tidak lebih dari 180 karakter mungkin.</p>
-                        </div>
-                        <div class="col-2">
-                            <h3 class="h3">Harga</h3>
-                            <p>Rp 10.000</p>
-                        </div>
-                        <div class="col-2">
-                            <h3 class="h3">Jumlah</h3>
-                            <input type="number" name="qty" value="1" style="width: 100%;">
-                        </div>
-                        <div class="col-2">
-                            <h3 class="h3">Total</h3>
-                            <p>Rp 10.000</p>
-                        </div>
-                    </div>
-                </div> --}}
                 @foreach($cartItems as $key => $cart)
                 <div class="cart-item">
                     <div class="row">
@@ -155,7 +132,7 @@
             <hr>
             <div class="d-flex justify-content-between">
                 <div>Sub total</div>
-                <div class="text-end" id="chekcout_info_subtotal"></div>
+                <div class="text-end" id="chekcout_info_subtotal">Rp{{ number_format($subtotals, 2, '.', ',') }}</div>
             </div>
             <div class="d-flex justify-content-between">
                 <div>Biaya pengiriman</div>
@@ -163,7 +140,7 @@
             </div>
             <div class="d-flex justify-content-between">
                 <div><h3 class="h3">Total</h3></div>
-                <div class="text-end"><h3 class="h3" id="chekcout_info_total"></h3></div>
+                <div class="text-end"><h3 class="h3" id="chekcout_info_total">Rp{{ number_format($subtotals + 15000, 2, '.', ',') }}</h3></div>
             </div>
             <a href="#" class="btn btn-success">Checkout</a>
         </div>
