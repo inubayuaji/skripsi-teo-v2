@@ -22,12 +22,17 @@
 @section('script')
     <script>
         $(document).ready(function() {
+            var state = {
+                cartItemSubtotals: @json($cartItemSubtotals, JSON_FORCE_OBJECT)
+            }
+
+            function numberFormat(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
             function CartItem() {
                 const elDoc = $(document);
 
-                function numberFormat(number) {
-                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                }
                 function evChangeQtyOredered() {
                     let key = $(this).data('key');
                     let price = $(this).data('price');
@@ -36,15 +41,44 @@
                     const elSubtotal = $('#key-' + key);
 
                     let subtotal = price * qtyOrderd;
+                    state.cartItemSubtotals[key] = subtotal
 
                     elSubtotal.text('Rp' + numberFormat(subtotal));
                     elSubtotal.attr('data-subtotal', subtotal);
+
+                    elDoc.trigger('cart_item_update');
                 }
 
                 elDoc.on('change', '[data-qty]', evChangeQtyOredered);
+                elDoc.trigger('cart_item_update');
+            }
+
+            function ChekcoutInfo() {
+                const elDoc = $(document);
+                const elTotal = $('#chekcout_info_total');
+                const elSubtotal = $('#chekcout_info_subtotal');
+
+                function evUpdateCartItem() {
+                    let total = 0;
+                    let subtotal = 0;
+
+                    for(let key in state.cartItemSubtotals) {
+                        if(state.cartItemSubtotals.hasOwnProperty(key)) {
+                            subtotal += state.cartItemSubtotals[key];
+                        }
+                    }
+
+                    total = subtotal + 15000; // default ongkir;
+
+                    elTotal.text('Rp' + numberFormat(total));
+                    elSubtotal.text('Rp' + numberFormat(subtotal));
+                }
+
+                elDoc.on('cart_item_update', evUpdateCartItem);
             }
 
             CartItem();
+            ChekcoutInfo();
         });
     </script>
 @endsection
@@ -121,7 +155,7 @@
             <hr>
             <div class="d-flex justify-content-between">
                 <div>Sub total</div>
-                <div class="text-end">Rp 10.000</div>
+                <div class="text-end" id="chekcout_info_subtotal"></div>
             </div>
             <div class="d-flex justify-content-between">
                 <div>Biaya pengiriman</div>
@@ -129,7 +163,7 @@
             </div>
             <div class="d-flex justify-content-between">
                 <div><h3 class="h3">Total</h3></div>
-                <div class="text-end"><h3 class="h3">Rp 25.000</h3></div>
+                <div class="text-end"><h3 class="h3" id="chekcout_info_total"></h3></div>
             </div>
             <a href="#" class="btn btn-success">Checkout</a>
         </div>

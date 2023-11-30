@@ -39,9 +39,17 @@ class WebPageController extends Controller
         $customerId = Auth::guard('customer')->id();
         $cartItems = Cart::where('customer_id', $customerId)
             ->get();
+        $cartItemSubtotals = [];
+
+        foreach($cartItems as $key => $cart) {
+            $cartItemSubtotals[$key] = $cart->product->price * $cart->qty_ordered;
+        }
+
+        // dd(json_encode($cartItemSubtotals, JSON_FORCE_OBJECT));
         
         return view('web.cart', [
-            'cartItems' => $cartItems
+            'cartItems' => $cartItems,
+            'cartItemSubtotals' => $cartItemSubtotals
         ]);
     }
 
