@@ -24,7 +24,7 @@ Route::controller(WebPageController::class)
         // Route::get('/', 'index')->name('index');
         Route::get('/about', 'about')->name('about');
         Route::get('/contact', 'contact')->name('contact');
-        Route::get('/shop-single', 'shopSingle')->name('shop-single');
+        Route::get('/shop-single/{id}', 'shopSingle')->name('shop-single');
         Route::get('/login', 'login')->name('auth.login');
         Route::get('/register', 'register')->name('auth.register');
     });

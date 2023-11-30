@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,12 @@ class WebPageController extends Controller
 {
     function index(): View
     {
-        return view('web.shop');
+        $productList = Product::where('is_active', true)
+            ->get();
+
+        return view('web.shop', [
+            'productList' => $productList
+        ]);
     }
 
     function about(): View
@@ -29,9 +35,13 @@ class WebPageController extends Controller
         return view('web.contact');
     }
 
-    function shopSingle() : View
+    function shopSingle(int $id) : View
     {
-        return view('web.shop-single');
+        $product = Product::findOrFail($id);
+
+        return view('web.shop-single', [
+            'product' => $product
+        ]);
     }
 
     function cart() : View

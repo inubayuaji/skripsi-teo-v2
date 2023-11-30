@@ -14,8 +14,9 @@
                 let qtyOrdered = 1;
 
                 function fnUrl() {
-                    let url = new URL('{{ route('action.cart_add', ['product_id' => 1, 'qty_ordered' => 1]) }}');
+                    let url = new URL('{{ route('action.cart_add') }}');
 
+                    url.searchParams.set('product_id', {{ $product->id }});
                     url.searchParams.set('qty_ordered', qtyOrdered);
 
                     elUrlLink.attr('href', url.href);
@@ -65,29 +66,18 @@
         <div class="row">
             <div class="col-lg-5 mt-5">
                 <div class="card mb-3">
-                    <img class="card-img img-fluid" src="assets/img/product_single_10.jpg" alt="Card image cap" id="product-detail">
+                    <img class="card-img img-fluid" src="{{ url('storage/' . $product->featured_image) }}" alt="Card image cap" id="product-detail">
                 </div>
             </div>
             <!-- col end -->
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="h2">Active Wear</h1>
-                        <p class="h3 py-2">$25.00</p>
+                        <h1 class="h2">{{ $product->name }}</h1>
+                        <p class="h3 py-2">Rp{{ number_format($product->price, 2, '.', ',') }}</p>
 
                         <h6>Description:</h6>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod temp incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse. Donec condimentum elementum convallis. Nunc sed orci a diam ultrices aliquet interdum quis nulla.</p>
-
-                        <h6>Specification:</h6>
-                        <ul class="list-unstyled pb-3">
-                            <li>Lorem ipsum dolor sit</li>
-                            <li>Amet, consectetur</li>
-                            <li>Adipiscing elit,set</li>
-                            <li>Duis aute irure</li>
-                            <li>Ut enim ad minim</li>
-                            <li>Dolore magna aliqua</li>
-                            <li>Excepteur sint</li>
-                        </ul>
+                        <p>{{ $product->description }}</p>
 
                         <div>
                             <div class="row">
@@ -105,7 +95,7 @@
                             </div>
                             <div class="row pb-3">
                                 <div class="col d-grid">
-                                    <a href="{{ route('action.cart_add', ['product_id' => 1, 'qty_ordered' => 1]) }}" class="btn btn-success btn-lg" id="product_qty_add_cart_url">Add To Cart</a>
+                                    <a href="{{ route('action.cart_add', ['product_id' => $product->id, 'qty_ordered' => 1]) }}" class="btn btn-success btn-lg" id="product_qty_add_cart_url">Add To Cart</a>
                                 </div>
                             </div>
                         </div>
