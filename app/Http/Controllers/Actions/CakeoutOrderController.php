@@ -28,7 +28,9 @@ class CakeoutOrderController extends Controller
         $unavaliableStockProducts = $this->checkStock($customerId);
 
         if($unavaliableStockProducts) {
-            return $unavaliableStockProducts;
+            return redirect()
+                ->back()
+                ->with('chakeout_fail', 'Stock barang tidak mencukupi.');
         }
 
         // create order
@@ -43,7 +45,8 @@ class CakeoutOrderController extends Controller
         // return redirect()
         //     ->route('/success_create_order')
 
-        return 'Sukses';
+        return redirect()
+            ->route('web.customer.order');
     }
 
     private function createOrder($customerId, $shipmentAddress) {

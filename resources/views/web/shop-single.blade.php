@@ -79,6 +79,9 @@
                         <h6>Description:</h6>
                         <p>{{ $product->description }}</p>
 
+                        <h6>Stock:</h6>
+                        <p>{{ $product->stock }}</p>
+
                         <div>
                             <div class="row">
                                 <div class="col-auto">

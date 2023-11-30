@@ -110,6 +110,18 @@
 
 <!-- Start Contact -->
 <div class="container py-5">
+     @if(Session::has('chakeout_fail'))
+     <div class="row">
+         <div class="col-lg-12">
+             <div class="alert alert-danger mt-4">
+                 {{ Session::get('chakeout_fail') }}
+                 @php
+                 Session::forget('chakeout_fail');
+                 @endphp
+             </div>
+         </div>
+     </div>
+     @endif
     <div class="row">
         <div class="col-12 col-md-9">
             <div class="cart-items">

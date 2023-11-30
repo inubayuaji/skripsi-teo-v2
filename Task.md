@@ -22,8 +22,8 @@
    * order list [v]
    * logout [v]
    * profil -> opsional [v]
-  * checkout page
-    * kurang pesan berhasil atau gagal
+  * checkout page [v]
+    * kurang pesan berhasil atau gagal [v]
   * product
     * catalog [v]
     * detail [v]
