@@ -11,7 +11,7 @@ class WebPageController extends Controller
 {
     function index(): View
     {
-        return view('web.index');
+        return view('web.shop');
     }
 
     function about(): View
@@ -19,10 +19,10 @@ class WebPageController extends Controller
         return view('web.about');
     }
 
-    function shop(): View
-    {
-        return view('web.shop');
-    }
+    // function shop(): View
+    // {
+    //     return view('web.shop');
+    // }
 
     function contact(): View
     {

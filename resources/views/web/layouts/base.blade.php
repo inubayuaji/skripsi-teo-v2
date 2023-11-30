@@ -59,13 +59,10 @@
                 <div class="flex-fill">
                     <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('web.index') }}">Home</a>
+                            <a class="nav-link" href="{{ route('web.index') }}">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('web.about') }}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('web.shop') }}">Shop</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('web.contact') }}">Contact</a>
