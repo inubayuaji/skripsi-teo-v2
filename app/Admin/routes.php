@@ -21,4 +21,5 @@ Route::group([
         // ->only(['index', 'show', 'destroy']);
     $router->resource('contact-forms', ContactFormController::class)
         ->only(['index', 'show', 'destroy']);
+    $router->resource('purchases', PurchaseController::class);
 });
