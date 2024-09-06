@@ -19,4 +19,14 @@ class Product extends Model
         'is_active',
         'images'
     ];
+
+    public function getImagesAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function setImagesAttribute($value)
+    {
+        $this->attributes['images'] = implode(',', $value);
+    }
 }
