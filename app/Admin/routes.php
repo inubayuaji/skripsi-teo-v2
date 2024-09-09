@@ -1,5 +1,11 @@
 <?php
 
+use App\Admin\Controllers\ConsumptionController;
+use App\Admin\Controllers\ContactFormController;
+use App\Admin\Controllers\CustomerController;
+use App\Admin\Controllers\OrderController;
+use App\Admin\Controllers\ProductController;
+use App\Admin\Controllers\PurchaseController;
 use Illuminate\Routing\Router;
 use OpenAdmin\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Route;
