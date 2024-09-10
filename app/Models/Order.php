@@ -16,7 +16,8 @@ class Order extends Model
         'amount_total',
         'shipment_total',
         'shipment_address',
-        'status'
+        'status',
+        'payment_proof'
     ];
 
     public function customer() {

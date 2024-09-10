@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('shipment_total');
             $table->mediumText('shipment_address');
             $table->string('status');
+            $table->string('payment_proof')
+                ->nullable();
             $table->timestamps();
         });
     }
