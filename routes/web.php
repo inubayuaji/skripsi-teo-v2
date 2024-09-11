@@ -65,5 +65,7 @@ Route::middleware('auth:customer')
             ->group(function () {
                 Route::get('/profil', 'profil')->name('profil');
                 Route::get('/order', 'order')->name('order');
+                Route::get('/order/{id}/upload', 'uploadForm')->name('uplad_form');
+                Route::post('/order/{id}/upload', 'uploadData')->name('uplad_data');
             });
      });

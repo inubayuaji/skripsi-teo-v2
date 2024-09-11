@@ -30,4 +30,20 @@ class CustomerController extends Controller
             'orderList' => $orderList
         ]);
     }
+
+    public function uploadForm(int $orderId): View
+    {
+        return view('web.customer.upload', [
+            'orderId' => $orderId
+        ]);
+    }
+
+    public function uploadData(Request $req, int $orderId)
+    {
+        dd($req->file('payment_proof'));
+
+        return redirect()
+            ->back()
+            ->with('message', 'Upload success');
+    }
 }

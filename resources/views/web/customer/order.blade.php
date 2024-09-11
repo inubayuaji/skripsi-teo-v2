@@ -28,7 +28,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="h2">Order</h2>
-                        <table class="table">
+                        <table class="table table-sm">
                             <thead>
                                 <tr>
                                     <th>No Invoice</th>
@@ -36,6 +36,7 @@
                                     <th>Shipment address</th>
                                     <th>Status</th>
                                     <th>Created at</th>
+                                    <th>Upload payment</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,6 +65,7 @@
                                     <td>{{ $order->shipment_address }}</td>
                                     <td>{{ $status }}</td>
                                     <td>{{ $order->created_at }}</td>
+                                    <td><a href="{{ route('web.customer.uplad_form', ['id' => $order->id]) }}">Upload</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

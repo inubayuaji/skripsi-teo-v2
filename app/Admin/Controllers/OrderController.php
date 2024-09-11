@@ -104,6 +104,8 @@ class OrderController extends AdminController
                     break;
                 }
             });
+        $show->field('payment_proof', __('Payment proof'))
+            ->image($base_url = '', $width = 200, $height = 200);
         $show->field('created_at', __('Created at'));
 
         $show->lines('Order line', function ($line) {
