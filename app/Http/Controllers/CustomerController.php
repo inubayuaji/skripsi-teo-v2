@@ -6,6 +6,7 @@ use App\Models\Order;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CustomerController extends Controller
 {
@@ -40,7 +41,12 @@ class CustomerController extends Controller
 
     public function uploadData(Request $req, int $orderId)
     {
-        dd($req->file('payment_proof'));
+        $order = Order::find($orderId);
+        $path = $req->file('payment_proof')->store('public/images/payments');
+        $path = Str::replace('public/', '', $path);
+
+        $order->payment_proof = $path;
+        $order->save();
 
         return redirect()
             ->back()

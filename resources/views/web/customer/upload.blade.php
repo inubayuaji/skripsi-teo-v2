@@ -25,6 +25,12 @@
             </div>
 
             <div class="col-lg-9 mt-5">
+                @if(session()->has('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ session()->get('message') }}
+                </div>
+                @endif
+
                 <div class="card">
                     <div class="card-body">
                         <h2 class="h2">Upload payment</h2>
