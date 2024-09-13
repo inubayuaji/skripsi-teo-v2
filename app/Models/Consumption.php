@@ -11,12 +11,12 @@ class Consumption extends Model
 
     protected $table ='consumption';
     protected $fillable = [
-        'product_id',
+        'feed_id',
         'quantity',
         'note'
     ];
 
-    public function product() {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+    public function feed() {
+        return $this->hasOne(Feed::class, 'id', 'feed_id');
     }
 }

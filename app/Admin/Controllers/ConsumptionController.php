@@ -7,7 +7,7 @@ use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
 use \App\Models\Consumption;
-use App\Models\Product;
+use App\Models\Feed;
 
 class ConsumptionController extends AdminController
 {
@@ -35,8 +35,8 @@ class ConsumptionController extends AdminController
             $batch->disableDelete();
         });
 
-        $grid->column('product_id', __('Product'))->display(function () {
-            return $this->product->name;
+        $grid->column('feed_id', 'Product')->display(function () {
+            return $this->feed->name . ' ' . $this->feed->qty . ' ' . $this->feed->unit;
         });
         $grid->column('quantity', __('Quantity'));
         $grid->column('note', __('Note'));
@@ -61,8 +61,8 @@ class ConsumptionController extends AdminController
                 $tools->disableDelete();
             });
 
-        $show->field('product_id', __('Product'))->as(function () {
-            return $this->product->name;
+        $show->field('feed_id', __('Product'))->as(function () {
+            return $this->feed->name . ' ' . $this->feed->qty . ' ' . $this->feed->unit;
         });
         $show->field('quantity', __('Quantity'));
         $show->field('note', __('Note'));
@@ -80,19 +80,20 @@ class ConsumptionController extends AdminController
     {
         $form = new Form(new Consumption());
 
-        $form->select('product_id', __("Product"))
+        $form->select('feed_id', __("Product"))
             ->required()
-            ->options(Product::all()
-            ->pluck('name', 'id'));
+            ->options(Feed::all()->map(function ($feed) {
+                return $feed->name . ' ' . $feed->qty . ' ' . $feed->unit;
+            })->toArray());
         $form->number('quantity', __('Quantity'))
             ->required()
             ->min(0);
         $form->textarea('note', __('Note'));
 
         $form->saving(function (Form $form) {
-            $product = Product::find($form->product_id);
-            $product->stock = $product->stock - $form->quantity;
-            $product->save();
+            $feed = Feed::find($form->feed_id);
+            $feed->stock = (int)$feed->stock - (int)$form->quantity;
+            $feed->save();
         });
 
         return $form;

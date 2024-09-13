@@ -3,6 +3,7 @@
 use App\Admin\Controllers\ConsumptionController;
 use App\Admin\Controllers\ContactFormController;
 use App\Admin\Controllers\CustomerController;
+use App\Admin\Controllers\FeedController;
 use App\Admin\Controllers\OrderController;
 use App\Admin\Controllers\ProductController;
 use App\Admin\Controllers\PurchaseController;
@@ -29,4 +30,5 @@ Route::group([
         ->only(['index', 'show', 'destroy']);
     $router->resource('purchases', PurchaseController::class);
     $router->resource('consumptions', ConsumptionController::class);
+    $router->resource('feeds', FeedController::class);
 });

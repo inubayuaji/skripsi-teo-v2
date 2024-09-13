@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('purchase', function (Blueprint $table) {
+        Schema::create('feed', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('feed_id');
-            $table->string('vendor');
-            $table->integer('quantity');
-            // $table->integer('amount_total');
+            $table->string('name');
+            $table->string('unit');
+            $table->integer('qty');
+            $table->integer('price');
+            $table->integer('stock');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase');
+        Schema::dropIfExists('feed');
     }
 };

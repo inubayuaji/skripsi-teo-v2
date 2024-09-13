@@ -11,13 +11,13 @@ class Purchase extends Model
 
     protected $table ='purchase';
     protected $fillable = [
-        'product_id',
+        'feed_id',
         'vendor',
         'quantity',
         'amount_total'
     ];
 
-    public function product() {
-        return $this->hasOne(Product::class, 'id', 'product_id');
+    public function feed() {
+        return $this->hasOne(feed::class, 'id', 'feed_id');
     }
 }

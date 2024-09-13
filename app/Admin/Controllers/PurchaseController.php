@@ -6,7 +6,7 @@ use OpenAdmin\Admin\Controllers\AdminController;
 use OpenAdmin\Admin\Form;
 use OpenAdmin\Admin\Grid;
 use OpenAdmin\Admin\Show;
-use \App\Models\Product;
+use \App\Models\Feed;
 use \App\Models\Purchase;
 
 class PurchaseController extends AdminController
@@ -36,8 +36,8 @@ class PurchaseController extends AdminController
         });
 
         $grid->column('vendor', 'Vendor');
-        $grid->column('product_id', 'Product')->display(function () {
-            return $this->product->name;
+        $grid->column('feed_id', 'Product')->display(function () {
+            return $this->feed->name . ' ' . $this->feed->qty . ' ' . $this->feed->unit;
         });
         $grid->column('quantity', 'Quantity');
         $grid->column('amount_total', 'Amount total');
@@ -63,8 +63,8 @@ class PurchaseController extends AdminController
             });
 
         $show->field('vendor', 'Vendor');
-        $show->field('product_id', 'Product')->as(function () {
-            return $this->product->name;
+        $show->field('feed_id', 'Product')->as(function () {
+            return $this->feed->name . ' ' . $this->feed->qty . ' ' . $this->feed->unit;
         });
         $show->field('quantity', 'Quantity');
         $show->field('amount_total', 'Amount total');
@@ -88,21 +88,22 @@ class PurchaseController extends AdminController
 
         $form->text('vendor', 'Vendor')
             ->required();
-        $form->select('product_id', __("Product"))
+        $form->select('feed_id', __("Product"))
             ->required()
-            ->options(Product::all()
-            ->pluck('name', 'id'));
+            ->options(Feed::all()->map(function ($feed) {
+                return $feed->name . ' ' . $feed->qty . ' ' . $feed->unit;
+            })->toArray());
         $form->number('quantity', __('Quantity'))
             ->required()
             ->min(0);
-        $form->currency('amount_total', __('Amount total'))
-            ->required()
-            ->symbol('Rp');
+        // $form->currency('amount_total', __('Amount total'))
+        //     ->required()
+        //     ->symbol('Rp');
 
         $form->saving(function (Form $form) {
-            $product = Product::find($form->product_id);
-            $product->stock = $product->stock + $form->quantity;
-            $product->save();
+            $feed = Feed::find($form->feed_id);
+            $feed->stock = (int)$feed->stock + (int)$form->quantity;
+            $feed->save();
         });
 
         return $form;

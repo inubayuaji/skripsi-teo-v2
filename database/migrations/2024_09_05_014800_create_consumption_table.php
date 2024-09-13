@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('consumption', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id');
+            $table->foreignId('feed_id');
             $table->integer('quantity');
-            $table->mediumText('note');
+            $table->mediumText('note')
+                ->nullable();
             $table->timestamps();
         });
     }
