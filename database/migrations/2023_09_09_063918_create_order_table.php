@@ -20,6 +20,8 @@ return new class extends Migration
             $table->integer('amount_total');
             $table->integer('shipment_total');
             $table->mediumText('shipment_address');
+            $table->string('subdistrict')
+                ->nullable();
             $table->string('status');
             $table->string('payment_proof')
                 ->nullable();

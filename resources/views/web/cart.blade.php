@@ -166,7 +166,31 @@
             <form method="post" action="{{ route('action.cakeout') }}">
                 @csrf
                 <h3 class="h3">Alamat</h3>
-                <textarea style="width: 100%;" name="shipment_address" required></textarea>
+                <textarea style="width: 100%; margin-bottom: 1rem;" name="shipment_address" required></textarea>
+                <h3 class="h3">Kecamatan</h3>
+                <select name="subdistrict" required>
+                    <option value="Winong">Winong</option>
+                    <option value="Wedarijaksa">Wedarijaksa</option>
+                    <option value="Trangkil">Trangkil</option>
+                    <option value="Tlogowungu">Tlogowungu</option>
+                    <option value="Tayu">Tayu</option>
+                    <option value="Tambakromo">Tambakromo</option>
+                    <option value="Sukolilo">Sukolilo</option>
+                    <option value="Pucakwangi">Pucakwangi</option>
+                    <option value="Pati">Pati</option>
+                    <option value="Margoyoso">Margoyoso</option>
+                    <option value="Margorejo">Margorejo</option>
+                    <option value="Juwana">Juwana</option>
+                    <option value="Jakenan">Jakenan</option>
+                    <option value="Jaken">Jaken</option>
+                    <option value="Gunungwungkal">Gunungwungkal</option>
+                    <option value="Gembong">Gembong</option>
+                    <option value="Gabus">Gabus</option>
+                    <option value="Dukuhseti">Dukuhseti</option>
+                    <option value="Cluwak">Cluwak</option>
+                    <option value="Batangan">Batangan</option>
+                    <option value="Kayen">Kayen</option>
+                </select>
                 <hr>
                 <div class="d-flex justify-content-between">
                     <div>Sub total</div>

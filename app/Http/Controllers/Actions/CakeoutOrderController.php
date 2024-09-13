@@ -20,9 +20,10 @@ class CakeoutOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __invoke(Request $request)
-    {   
+    {
         $customerId = Auth::guard('customer')->id();
         $shipmentAddress = $request->shipment_address;
+        $subdistrict = $request->subdistrict;
 
         // check if stock mencukupi
         $unavaliableStockProducts = $this->checkStock($customerId);
@@ -34,7 +35,7 @@ class CakeoutOrderController extends Controller
         }
 
         // create order
-        $order = $this->createOrder($customerId, $shipmentAddress);
+        $order = $this->createOrder($customerId, $shipmentAddress, $subdistrict);
 
         // create lines
         $this->createOrderLine($customerId, $order->id);
@@ -49,7 +50,7 @@ class CakeoutOrderController extends Controller
             ->route('web.customer.order');
     }
 
-    private function createOrder($customerId, $shipmentAddress) {
+    private function createOrder($customerId, $shipmentAddress, $subdistrict) {
         $invoiceNo = $this->createInvoiceNo();
         $amoutTotal = $this->countAmountTotal($customerId);
 
@@ -59,6 +60,7 @@ class CakeoutOrderController extends Controller
             'amount_total' => $amoutTotal,
             'shipment_total' => 15000, # nanti lihat database config shipment fee
             'shipment_address' => $shipmentAddress,
+            'subdistrict' => $subdistrict,
             'status' => 'N' # new
         ]);
 

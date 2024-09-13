@@ -42,7 +42,7 @@ class OrderController extends AdminController
             return $this->customer->name;
         });
         $grid->column('amount_total', __('Amount total'));
-        $grid->column('shipment_address', __('Shipment address'));
+        $grid->column('subdistrict', __('Kecamatan'));
         $grid->column('status', __('Status'))->display(function () {
             switch($this->status) {
                 case 'N':
@@ -87,6 +87,7 @@ class OrderController extends AdminController
         $show->field('amount_total', __('Amount total'));
         $show->field('shipment_total', __('Shipment total'));
         $show->field('shipment_address', __('Shipment address'));
+        $show->field('subdistrict', __('Kecamatan'));
         $show->field('status', __('Status'))
             ->as(function () {
                 switch($this->status) {
