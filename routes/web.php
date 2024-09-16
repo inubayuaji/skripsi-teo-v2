@@ -67,5 +67,6 @@ Route::middleware('auth:customer')
                 Route::get('/order', 'order')->name('order');
                 Route::get('/order/{id}/upload', 'uploadForm')->name('uplad_form');
                 Route::post('/order/{id}/upload', 'uploadData')->name('uplad_data');
+                Route::get('/order/{id}/invoice', 'invoice')->name('invoice');
             });
      });

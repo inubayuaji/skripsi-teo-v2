@@ -52,4 +52,13 @@ class CustomerController extends Controller
             ->back()
             ->with('message', 'Upload success');
     }
+
+    public function invoice(int $orderId)
+    {
+        $order = Order::findOrFail($orderId);
+
+        return view('web.customer.invoice', [
+            'order' => $order
+        ]);
+    }
 }

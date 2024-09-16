@@ -37,6 +37,7 @@
                                     <th>Status</th>
                                     <th>Created at</th>
                                     <th>Upload payment</th>
+                                    <th>Invoice</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,6 +67,11 @@
                                     <td>{{ $status }}</td>
                                     <td>{{ $order->created_at }}</td>
                                     <td><a href="{{ route('web.customer.uplad_form', ['id' => $order->id]) }}">Upload</a></td>
+                                    <td>
+                                        @if($order->status == 'D')
+                                        <a href="{{ route('web.customer.invoice', ['id' => $order->id]) }}">Tampil</a>
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
